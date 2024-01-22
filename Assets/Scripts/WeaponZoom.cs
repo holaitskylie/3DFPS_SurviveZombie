@@ -9,26 +9,26 @@ public class WeaponZoom : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera fpsCam;
     [SerializeField] private float zoomOut = 40f;
     [SerializeField] private float zoomIn = 20f;
-    [SerializeField] private GameObject sniperGun;
+    [SerializeField] private Animator animator;
 
     private bool zoomToggle = false;
+
+    private void Start()
+    {
+        animator = GetComponent<Animator>();
+    }
 
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
-        {
-            Animator zoomAnim = sniperGun.GetComponent<Animator>();
+        {          
 
             if (zoomToggle == false)
             {
                 zoomToggle = true;
                 fpsCam.m_Lens.FieldOfView = zoomIn;
 
-                
-                if (zoomAnim != null)
-                {
-                    zoomAnim.SetTrigger("ZoomIn");
-                }
+                animator.SetTrigger("ZoomIn");               
                 
             }
             else
@@ -36,10 +36,7 @@ public class WeaponZoom : MonoBehaviour
                 zoomToggle = false;
                 fpsCam.m_Lens.FieldOfView = zoomOut;
 
-                if(zoomAnim != null)
-                {
-                    zoomAnim.SetTrigger("ZoomOut");
-                }
+                animator.SetTrigger("ZoomOut");
             }
 
         }
