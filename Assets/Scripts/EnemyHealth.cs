@@ -8,10 +8,13 @@ public class EnemyHealth : MonoBehaviour
 
     public void TakeDamage(float damage)
     {
+        //GetComponent<EnemyAI>().OnDamaged();
+        BroadcastMessage("OnDamaged");
         hitPoints -= damage;
 
         if(hitPoints <= 0)
         {
+            hitPoints = 0;
             Destroy(gameObject);
         }
     }
