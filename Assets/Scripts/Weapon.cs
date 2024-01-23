@@ -4,16 +4,24 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    [Header("Gun Settings")]
     [SerializeField] Camera FPSCam;
     [SerializeField] private float range = 100f;
     [SerializeField] private float damage = 30f;
     [SerializeField] private ParticleSystem muzzleFx;
     [SerializeField] private GameObject hitEffect;
     [SerializeField] private float shotCooldown = 0.5f;
-
-    [SerializeField] private Ammo ammoSlot;
     private bool canShoot = true;
-  
+
+    [Header("Ammo")]
+    [SerializeField] private Ammo ammoSlot;
+    [SerializeField] private AmmoType ammoType;
+
+    private void OnEnable()
+    {
+        canShoot = true;
+    }
+
     void Update()
     {
         if (Input.GetButtonDown("Fire1") && canShoot == true)
@@ -27,11 +35,13 @@ public class Weapon : MonoBehaviour
     {
         canShoot = false;
 
-        if(ammoSlot.GetCurrentAmmo() > 0)
+        //Gun 프리팹에 설정되어 있는 ammoType을 인자값으로 넣어
+        //Player의 탄약 슬롯에서 현재 탄약의 수를 가져온다
+        if(ammoSlot.GetCurrentAmmo(ammoType) > 0)
         {
             ProcessRaycast();
             PlayMuzzleFlash();
-            ammoSlot.ReduceCurrentAmmo();
+            ammoSlot.ReduceCurrentAmmo(ammoType);
         }
         
         yield return new WaitForSeconds(shotCooldown);

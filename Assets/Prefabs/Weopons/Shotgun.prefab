@@ -357,7 +357,9 @@ MonoBehaviour:
   damage: 30
   muzzleFx: {fileID: 780059730900218919}
   hitEffect: {fileID: 2429576156898718949, guid: 2ecc81fb43059f744836043a77c60faf, type: 3}
+  shotCooldown: 0.5
   ammoSlot: {fileID: 0}
+  ammoType: 0
 --- !u!1 &2337074158997199752
 GameObject:
   m_ObjectHideFlags: 0

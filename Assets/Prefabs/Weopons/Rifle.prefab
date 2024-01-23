@@ -192,6 +192,7 @@ MonoBehaviour:
   hitEffect: {fileID: 2429576156898718949, guid: 2ecc81fb43059f744836043a77c60faf, type: 3}
   shotCooldown: 0.5
   ammoSlot: {fileID: 0}
+  ammoType: 1
 --- !u!95 &1091368906056779521
 Animator:
   serializedVersion: 5

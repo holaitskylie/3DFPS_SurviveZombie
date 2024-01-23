@@ -18,6 +18,13 @@ public class WeaponZoom : MonoBehaviour
         animator = GetComponent<Animator>();
     }
 
+    private void OnDisable()
+    {
+        //무기를 사용하지 않을 때(무기 교체가 일어날 때)
+        //무조건 ZoomOut 처리
+        ZoomOut();
+    }
+
     private void Update()
     {
         if (Input.GetMouseButtonDown(1))
@@ -25,22 +32,31 @@ public class WeaponZoom : MonoBehaviour
 
             if (zoomToggle == false)
             {
-                zoomToggle = true;
-                fpsCam.m_Lens.FieldOfView = zoomIn;
-
-                animator.SetTrigger("ZoomIn");               
-                
+                ZoomIn();
             }
             else
             {
-                zoomToggle = false;
-                fpsCam.m_Lens.FieldOfView = zoomOut;
-
-                animator.SetTrigger("ZoomOut");
+                ZoomOut();
             }
 
         }
         
+    }
+
+    private void ZoomIn()
+    {
+        zoomToggle = true;
+        fpsCam.m_Lens.FieldOfView = zoomIn;
+
+        animator.SetTrigger("ZoomIn");
+    }
+
+    private void ZoomOut()
+    {
+        zoomToggle = false;
+        fpsCam.m_Lens.FieldOfView = zoomOut;
+
+        animator.SetTrigger("ZoomOut");
     }
 
 }
