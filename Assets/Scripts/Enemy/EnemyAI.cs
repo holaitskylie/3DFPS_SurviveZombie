@@ -33,15 +33,7 @@ public class EnemyAI : MonoBehaviour
             return;
         }
             
-
-        if (health.IsDead())
-        {
-            enabled = false;
-            navMeshAgent.enabled = false;
-            //navMeshAgent.speed = 0;           
-            //navMeshAgent.isStopped = true;
-            return;
-        }               
+                        
 
         //target과의 거리 구하기
         distanceToTarget = Vector3.Distance(target.position, transform.position);

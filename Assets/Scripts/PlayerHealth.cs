@@ -2,33 +2,76 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerHealth : MonoBehaviour
+public class PlayerHealth : Entity
 {
-    [SerializeField] float hitPoints = 100f;
-    
-    private bool isDead = false;
+    //[SerializeField] float hitPoints = 100f;
+    //private bool isDead = false;
+
+    [Header("Sounds")]
+    private AudioSource playerAudioPlayer;
+    [SerializeField] private AudioClip deatClip;
+    [SerializeField] private AudioClip hitClip;
+    [SerializeField] private AudioClip itemPickUpClip;
+
+    private void Awake()
+    {
+        playerAudioPlayer = GetComponent<AudioSource>();
+    }
+
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+    }
 
     public bool IsDead()
     {
         return isDead;
     }
-    
-    public void TakeDamage(float damage)
+
+    public void RestoreHealth(float newHealth)
     {
-        hitPoints -= damage;
-        if (hitPoints <= 0)
+        if (isDead)
+            return;
+
+        currentHealth += newHealth;
+
+    }
+
+    public override void OnDamage(float damage, Vector3 hitPoint, Vector3 hitNormal)
+    {
+        base.OnDamage(damage, hitPoint, hitNormal);
+
+        if (!isDead)
         {
-            hitPoints = 0;
-            Debug.Log("You died");
-            Die();
+            playerAudioPlayer.PlayOneShot(hitClip);
+            GetComponent<DisplayDamage>().ActiveDamageImpact();
         }
+            
     }
 
-    private void Die()
+    public override void Die()
     {
-        if (isDead) return;
+        base.Die();
 
-        isDead = true;
-        GetComponent<DeathHandler>().HandleDeath();
+        playerAudioPlayer.PlayOneShot(deatClip);
+        //GetComponent<DeathHandler>().HandleDeath();
+
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (!isDead)
+        {
+            IItem item = other.GetComponent<IItem>();
+
+            if(item != null)
+            {
+                //item.Use(gameObject);
+                playerAudioPlayer.PlayOneShot(itemPickUpClip);
+            }
+            
+        }
+        
+    }
+          
 }

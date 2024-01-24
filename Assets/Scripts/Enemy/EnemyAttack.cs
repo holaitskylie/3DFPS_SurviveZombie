@@ -17,8 +17,12 @@ public class EnemyAttack : MonoBehaviour
         if (target != null)
         {
             Debug.Log("Attack!!");
-            target.TakeDamage(damage);
-            target.GetComponent<DisplayDamage>().ActiveDamageImpact();
+            //target.TakeDamage(damage);
+            Vector3 hitPoint = target.transform.position;
+            Vector3 hitNormal = transform.position - target.transform.position; 
+            target.OnDamage(damage, hitPoint, hitNormal);
+
+            //target.GetComponent<DisplayDamage>().ActiveDamageImpact();
 
         }
         else

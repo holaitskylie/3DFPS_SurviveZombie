@@ -11,8 +11,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float range = 100f;
     [SerializeField] private float damage = 30f;
     [SerializeField] private ParticleSystem muzzleFx;
-    [SerializeField] private ParticleSystem shellFX;
-    [SerializeField] private GameObject hitEffect;
+    //[SerializeField] private ParticleSystem shellFX;
+    //[SerializeField] private GameObject hitEffect;
     [SerializeField] private float shotCooldown = 0.5f;
     private bool canShoot = true;
 
@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour
         muzzleFx.Play();
 
         //ÅºÇÇ ¹èÃâ ÀÌÆåÆ® Àç»ý
-        shellFX.Play();
+        //shellFX.Play();
 
         //ÃÑ°Ý ¼Ò¸® Àç»ý
         gunAudioPlayer.PlayOneShot(shotClip);
@@ -95,6 +95,7 @@ public class Weapon : MonoBehaviour
             Debug.Log("I hit this thing : " + hit.transform.name);
 
             IDamageable target = hit.collider.GetComponent<IDamageable>();
+            
             if(target != null)
             {
                 target.OnDamage(damage, hit.point, hit.normal);
@@ -117,9 +118,9 @@ public class Weapon : MonoBehaviour
             return;
     }
 
-    private void CreateHitEffect(RaycastHit hit)
+    /*private void CreateHitEffect(RaycastHit hit)
     {
         GameObject effect = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
         Destroy(effect, 1);
-    }
+    }*/
 }
