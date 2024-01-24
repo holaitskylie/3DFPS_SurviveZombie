@@ -14,16 +14,35 @@ public class EnemyAI : MonoBehaviour
     
     private NavMeshAgent navMeshAgent;
     private Animator animator;
+    private EnemyHealth health;
    
     
     void Start()
     {
         navMeshAgent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        health = GetComponent<EnemyHealth>();
     }
         
     void Update()
     {
+        if (target.GetComponent<PlayerHealth>().IsDead())
+        {
+            animator.SetBool("attack", false);
+            animator.SetTrigger("idle");
+            return;
+        }
+            
+
+        if (health.IsDead())
+        {
+            enabled = false;
+            navMeshAgent.enabled = false;
+            //navMeshAgent.speed = 0;           
+            //navMeshAgent.isStopped = true;
+            return;
+        }               
+
         //target과의 거리 구하기
         distanceToTarget = Vector3.Distance(target.position, transform.position);
 

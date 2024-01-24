@@ -18,6 +18,8 @@ public class EnemyAttack : MonoBehaviour
         {
             Debug.Log("Attack!!");
             target.TakeDamage(damage);
+            target.GetComponent<DisplayDamage>().ActiveDamageImpact();
+
         }
         else
             return;

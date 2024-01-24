@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    private PlayerHealth health;
+
     [Header("Gun Settings")]
     [SerializeField] Camera FPSCam;
     [SerializeField] private float range = 100f;
@@ -22,8 +24,18 @@ public class Weapon : MonoBehaviour
         canShoot = true;
     }
 
+    private void Start()
+    {
+         health = FindObjectOfType<PlayerHealth>();
+    }
+
     void Update()
     {
+        if (health.IsDead())
+        {
+            return;
+        }
+
         if (Input.GetButtonDown("Fire1") && canShoot == true)
         {            
             StartCoroutine(Shoot());
@@ -35,6 +47,7 @@ public class Weapon : MonoBehaviour
     {
         canShoot = false;
 
+        //총마다 어떤 탄약을 사용할 것인지에 대한 설정을 가지고 있음
         //Gun 프리팹에 설정되어 있는 ammoType을 인자값으로 넣어
         //Player의 탄약 슬롯에서 현재 탄약의 수를 가져온다
         if(ammoSlot.GetCurrentAmmo(ammoType) > 0)
