@@ -124,7 +124,16 @@ public class EnemyHealth : Entity
 
         if(!isDead)
         {
-            Instantiate(hitFX, hitPoint,Quaternion.LookRotation(hitNormal));       
+            //Instantiate(hitFX, hitPoint, Quaternion.LookRotation(hitNormal));
+            
+            ParticleSystem effect = Instantiate(hitFX, hitPoint,Quaternion.LookRotation(hitNormal));
+            if(effect != null)
+            {
+                effect.Play();
+                Destroy(effect.gameObject, 1f);
+                Debug.Log("ÀÌÆåÆ® Àç»ý");
+            }
+            
                                             
             enemyAudioPlayer.PlayOneShot(hitClip);
         }
