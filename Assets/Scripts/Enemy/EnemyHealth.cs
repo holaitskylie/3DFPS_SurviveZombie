@@ -39,7 +39,9 @@ public class EnemyHealth : Entity
     public void Setup(float newHealth, float newDamage)
     {
         startingHealth = newHealth;
-        
+
+        int _newDamage = Mathf.RoundToInt(newDamage);
+        GetComponent<EnemyAttack>().damage = _newDamage;       
 
     }
 

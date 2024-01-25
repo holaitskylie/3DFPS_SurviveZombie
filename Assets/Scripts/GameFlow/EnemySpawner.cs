@@ -13,7 +13,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float healthMin = 80f;
 
     public Transform[] spawnPoints;
-    private List<GameObject> enemies = new List<GameObject>();
+    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private int wave;
 
     
