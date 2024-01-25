@@ -5,6 +5,7 @@ using UnityEngine;
 public class EnemySpawner : MonoBehaviour
 {
     [SerializeField] private GameObject enemyPrefab;
+    [SerializeField] private GameObject bossPrefab;
 
     [Header("Enemy Settings")]
     [SerializeField] private float damageMax = 40f;
@@ -46,12 +47,16 @@ public class EnemySpawner : MonoBehaviour
         //현재 웨이브 * 1.5를 반올림한 수만큼 적 생성
         int spawnerCount = Mathf.RoundToInt(wave * 1.5f);
 
+        //TODO: 일정 웨이브 증가 후 보스몹 스폰
         for (int i = 0; i < spawnerCount; i++)
         {
             float enemyIntensity = Random.Range(0f, 1f);
 
             CreateEnemy(enemyIntensity);
         }
+
+        if(wave == 2)
+            CreateBoss();
 
     }
 
@@ -73,6 +78,18 @@ public class EnemySpawner : MonoBehaviour
 
         // OnEnemyDeath 메서드를 델리게이트로 정의하여 추가
         enemyHealth.onDeath += () => OnEnemyDeath(enemy);
+
+    }
+
+    private void CreateBoss()
+    {
+        Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+        GameObject boss = Instantiate(bossPrefab, spawnPoint.position, spawnPoint.rotation);
+        EnemyHealth bossHealth = boss.GetComponent<EnemyHealth>();
+        bossHealth.Setup(healthMax, damageMax);
+
+        enemies.Add(boss);
+        bossHealth.onDeath += () => OnEnemyDeath(boss);
     }
 
     private void OnEnemyDeath(GameObject enemy)

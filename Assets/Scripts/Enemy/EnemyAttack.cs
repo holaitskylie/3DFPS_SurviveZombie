@@ -6,10 +6,10 @@ public class EnemyAttack : MonoBehaviour
 {
     PlayerHealth target;
     public float damage = 40f;
+    
     void Start()
     {
-        target = FindObjectOfType<PlayerHealth>();
-        
+        target = FindObjectOfType<PlayerHealth>();        
     }
 
     public void AttackHitEvent()
@@ -28,4 +28,5 @@ public class EnemyAttack : MonoBehaviour
         else
             return;
     }
+        
 }

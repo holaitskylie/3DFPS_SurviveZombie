@@ -107,7 +107,8 @@ public class EnemyHealth : Entity
     private void AttackTarget()
     {
         animator.SetBool("attack", true);
-    }
+               
+    }  
 
     private void OnDrawGizmosSelected()
     {
