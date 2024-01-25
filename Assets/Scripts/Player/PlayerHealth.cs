@@ -70,7 +70,7 @@ public class PlayerHealth : Entity
 
             if(item != null)
             {
-                //item.Use(gameObject);
+                item.Use(gameObject);
                 playerAudioPlayer.PlayOneShot(itemPickUpClip);
             }
             
