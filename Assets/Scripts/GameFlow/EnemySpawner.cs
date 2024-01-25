@@ -16,7 +16,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private int wave;
 
-    
+
     void Update()
     {
         //TODO: Game Manager 생성
@@ -28,7 +28,7 @@ public class EnemySpawner : MonoBehaviour
 
         //UI 갱신
         UpdateUI();
-        
+
     }
 
     private void UpdateUI()
@@ -46,13 +46,13 @@ public class EnemySpawner : MonoBehaviour
         //현재 웨이브 * 1.5를 반올림한 수만큼 적 생성
         int spawnerCount = Mathf.RoundToInt(wave * 1.5f);
 
-        for(int i = 0; i < spawnerCount; i++)
+        for (int i = 0; i < spawnerCount; i++)
         {
             float enemyIntensity = Random.Range(0f, 1f);
 
             CreateEnemy(enemyIntensity);
         }
-       
+
     }
 
     //적을 생성하고 추적할 대상을 할당
@@ -66,10 +66,18 @@ public class EnemySpawner : MonoBehaviour
 
         GameObject enemy = Instantiate(enemyPrefab, spawnPoint.position, spawnPoint.rotation);
 
-        enemy.GetComponent<EnemyHealth>().Setup(health, damage);
+        EnemyHealth enemyHealth = enemy.GetComponent<EnemyHealth>();
+        enemyHealth.Setup(health, damage);
 
-        enemies.Add(enemy); 
+        enemies.Add(enemy);
 
-        //TODO: onDeath 이벤트 추가
+        // OnEnemyDeath 메서드를 델리게이트로 정의하여 추가
+        enemyHealth.onDeath += () => OnEnemyDeath(enemy);
+    }
+
+    private void OnEnemyDeath(GameObject enemy)
+    {
+        enemies.Remove(enemy);
+        Destroy(enemy.gameObject, 5f);
     }
 }

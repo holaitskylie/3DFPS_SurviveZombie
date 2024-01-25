@@ -132,8 +132,7 @@ public class EnemyHealth : Entity
             if(effect != null)
             {
                 effect.Play();
-                Destroy(effect.gameObject, 1f);
-                Debug.Log("이펙트 재생");
+                Destroy(effect.gameObject, 1f);                
             }
             
                                             

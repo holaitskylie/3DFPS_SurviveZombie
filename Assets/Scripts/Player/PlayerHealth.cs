@@ -36,7 +36,7 @@ public class PlayerHealth : Entity
         if (isDead)
             return;
 
-        currentHealth += newHealth;
+        currentHealth += newHealth;      
 
     }
 
