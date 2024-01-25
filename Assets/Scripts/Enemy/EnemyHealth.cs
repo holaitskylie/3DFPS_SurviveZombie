@@ -9,6 +9,7 @@ public class EnemyHealth : Entity
     //private bool isDead = false;
     private Animator animator;
     [SerializeField] private ParticleSystem hitFX;
+    
 
     [Header("Sounds")]
     private AudioSource enemyAudioPlayer;
@@ -16,7 +17,8 @@ public class EnemyHealth : Entity
     [SerializeField] private AudioClip hitClip;
 
     [Header("AI Navigation")]
-    private NavMeshAgent navMeshAgent;    
+    private NavMeshAgent navMeshAgent;
+    private PlayerHealth player;
     [SerializeField] private Transform target;
     [SerializeField] private float turnSpeed = 5f;
     [SerializeField] private float chaseRange = 5f; //target과의 거리
@@ -29,6 +31,9 @@ public class EnemyHealth : Entity
         animator = GetComponent<Animator>();
         enemyAudioPlayer = GetComponent<AudioSource>();
         navMeshAgent = GetComponent<NavMeshAgent>();
+
+        player = FindObjectOfType<PlayerHealth>();
+        target = player.transform;
     }
     
     public void Setup(float newHealth, float newDamage)
@@ -119,10 +124,8 @@ public class EnemyHealth : Entity
 
         if(!isDead)
         {
-            hitFX.transform.position = hitPoint;
-            hitFX.transform.rotation = Quaternion.LookRotation(hitNormal);
-            hitFX.Play();
-
+            Instantiate(hitFX, hitPoint,Quaternion.LookRotation(hitNormal));       
+                                            
             enemyAudioPlayer.PlayOneShot(hitClip);
         }
        
