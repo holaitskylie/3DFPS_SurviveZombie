@@ -1,11 +1,11 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using StarterAssets;
 
 public class PlayerHealth : Entity
 {
-    //[SerializeField] float hitPoints = 100f;
-    //private bool isDead = false;
+    private FirstPersonController controller;
 
     [Header("Sounds")]
     private AudioSource playerAudioPlayer;
@@ -16,11 +16,14 @@ public class PlayerHealth : Entity
     private void Awake()
     {
         playerAudioPlayer = GetComponent<AudioSource>();
+        controller = GetComponent<FirstPersonController>();
     }
 
     protected override void OnEnable()
     {
         base.OnEnable();
+
+        controller.enabled = true;
     }
 
     public bool IsDead()
@@ -54,6 +57,7 @@ public class PlayerHealth : Entity
         base.Die();
 
         playerAudioPlayer.PlayOneShot(deatClip);
+        controller.enabled = false;
         //GetComponent<DeathHandler>().HandleDeath();
 
     }

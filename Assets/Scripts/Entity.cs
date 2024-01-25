@@ -6,7 +6,7 @@ public class Entity : MonoBehaviour, IDamageable
     public float startingHealth = 100f;
     public float currentHealth { get; protected set; }
     public bool isDead { get; protected set; }
-    //public event Action onDeath;
+    public event Action onDeath;
 
     protected virtual void OnEnable()
     {
@@ -26,8 +26,8 @@ public class Entity : MonoBehaviour, IDamageable
 
     public virtual void Die()
     {
-        /*if (onDeath != null)
-            onDeath();*/
+        if (onDeath != null)
+            onDeath();
 
         isDead = true;
     }
