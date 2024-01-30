@@ -11,8 +11,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float range = 100f;
     [SerializeField] private float damage = 30f;
     [SerializeField] private ParticleSystem muzzleFx;
-    [SerializeField] private ParticleSystem shellFX;
-    [SerializeField] private GameObject hitEffect;
+    //[SerializeField] private ParticleSystem shellFX;
+
     [SerializeField] private float shotCooldown = 0.5f;
     private bool canShoot = true;
 
@@ -77,7 +77,7 @@ public class Weapon : MonoBehaviour
         muzzleFx.Play();
 
         //탄피 배출 이펙트 재생
-        shellFX.Play();
+        //shellFX.Play();
 
         //총격 소리 재생
         gunAudioPlayer.PlayOneShot(shotClip);
@@ -94,32 +94,26 @@ public class Weapon : MonoBehaviour
         {
             Debug.Log("I hit this thing : " + hit.transform.name);
 
+            if (hit.collider.CompareTag("Player")) return;           
+                
             IDamageable target = hit.collider.GetComponent<IDamageable>();
-            if(target != null)
-            {
-                target.OnDamage(damage, hit.point, hit.normal);
-            }
-
-            hitPosition = hit.point;
-
-            //TODO : 오브젝트 별로 Hit Effect 다르게 설정하기
-            /*CreateHitEffect(hit);
-
-            EnemyHealth target = hit.transform.GetComponent<EnemyHealth>();
 
             if (target != null)
             {
-                target.TakeDamage(damage);                
-            }*/
+                target.OnDamage(damage, hit.point, hit.normal);
+            }
+            else
+            {
+                Debug.Log("Target does not implement IDamageable: " + hit.collider.gameObject.name);
+                return;
+            }
+
+
+            hitPosition = hit.point;            
 
         }
         else
             return;
     }
-
-    private void CreateHitEffect(RaycastHit hit)
-    {
-        GameObject effect = Instantiate(hitEffect, hit.point, Quaternion.LookRotation(hit.normal));
-        Destroy(effect, 1);
-    }
+       
 }
