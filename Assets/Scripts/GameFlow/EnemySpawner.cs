@@ -16,6 +16,7 @@ public class EnemySpawner : MonoBehaviour
     public Transform[] spawnPoints;
     [SerializeField] private List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private int wave;
+    [SerializeField] private int endWave = 2;
 
 
     void Update()
@@ -55,7 +56,7 @@ public class EnemySpawner : MonoBehaviour
             CreateEnemy(enemyIntensity);
         }
 
-        if(wave == 2)
+        if(wave == endWave)
             CreateBoss();
 
     }
@@ -84,9 +85,14 @@ public class EnemySpawner : MonoBehaviour
     private void CreateBoss()
     {
         Transform spawnPoint = spawnPoints[Random.Range(0, spawnPoints.Length)];
+
         GameObject boss = Instantiate(bossPrefab, spawnPoint.position, spawnPoint.rotation);
         EnemyHealth bossHealth = boss.GetComponent<EnemyHealth>();
-        bossHealth.Setup(healthMax, damageMax);
+
+        float health = healthMax + 50f;
+        float damage = damageMax + 10f;
+       
+        bossHealth.Setup(health, damage);
 
         enemies.Add(boss);
         bossHealth.onDeath += () => OnEnemyDeath(boss);
