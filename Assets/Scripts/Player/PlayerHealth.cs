@@ -6,6 +6,9 @@ using StarterAssets;
 public class PlayerHealth : Entity
 {
     private FirstPersonController controller;
+    [SerializeField] private GameObject weapon;
+    [SerializeField] private Animator animator;
+    [SerializeField] private CameraManager cameraManager;
 
     [Header("Sounds")]
     private AudioSource playerAudioPlayer;
@@ -59,6 +62,10 @@ public class PlayerHealth : Entity
         playerAudioPlayer.PlayOneShot(deatClip);
         controller.enabled = false;
         //GetComponent<DeathHandler>().HandleDeath();
+
+        animator.SetTrigger("Die");
+        weapon.gameObject.SetActive(false);
+        cameraManager.SwitchCamera(cameraManager.deadCam);
 
     }
 

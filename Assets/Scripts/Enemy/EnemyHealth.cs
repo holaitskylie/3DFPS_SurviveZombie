@@ -50,29 +50,34 @@ public class EnemyHealth : Entity
         if (isDead)
             return;
 
+        //플레이어가 사망하면 Idle 상태 돌입
         if (target.GetComponent<PlayerHealth>().IsDead())
         {
             animator.SetBool("attack", false);
             animator.SetTrigger("idle");
+            navMeshAgent.isStopped = true;
+
             return;
         }
 
         //target과의 거리 구하기
         distanceToTarget = Vector3.Distance(target.position, transform.position);
+        EngageTarget();
 
-        if (isProvoked)
+        /*if (isProvoked)
         {
             EngageTarget();
         }
         else if (distanceToTarget <= chaseRange) //target과의 거리가 chaseRange보다 작을 때 
         {
             isProvoked = true;
-        }
+        }*/
 
     }
 
     private void EngageTarget()
     {
+
         FaceTarget();
 
         //target과의 거리가 제동 거리보다 같거나 크다면 계속 추적 

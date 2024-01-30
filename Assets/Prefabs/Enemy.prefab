@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 783091426950819955}
   - component: {fileID: 3249512724898128107}
   - component: {fileID: 983047641563049556}
-  m_Layer: 0
+  m_Layer: 7
   m_Name: Enemy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -945,7 +945,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   startingHealth: 100
   hitFX: {fileID: 6961077776283886705, guid: 2ecc81fb43059f744836043a77c60faf, type: 3}
-  deatClip: {fileID: 8300000, guid: eb9093cb68ff5a24a8fc1828bae870c5, type: 3}
+  deatClip: {fileID: 8300000, guid: 7c1f06b6de96f224b81b731fde8f9420, type: 3}
   hitClip: {fileID: 8300000, guid: 6d8a41482ca50794e8f8ca7fc7184147, type: 3}
   target: {fileID: 0}
   turnSpeed: 5
