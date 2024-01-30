@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AmmoPickup : MonoBehaviour
+public class AmmoPickup : MonoBehaviour, IItem
 {
     private float rotationSpeed = 20f;
     [SerializeField] private int ammoAmount = 5;
@@ -14,7 +14,7 @@ public class AmmoPickup : MonoBehaviour
             Rotate(new Vector3(0, 0, rotationSpeed * Time.deltaTime));
     }
 
-    private void OnTriggerEnter(Collider other)
+    /*private void OnTriggerEnter(Collider other)
     {
         if(other.gameObject.tag == "Player")
         {
@@ -23,6 +23,16 @@ public class AmmoPickup : MonoBehaviour
             other.GetComponent<Ammo>().IncreaseCurrentAmmo(ammoType, ammoAmount);
             Destroy(gameObject);
         }
+    }*/
+    
+    public void Use(GameObject target)
+    {
+        if(target.gameObject.tag == "Player")
+        {
+            Debug.Log("Pick up" + ammoType + " : " + ammoAmount);
+            target.GetComponent<Ammo>().IncreaseCurrentAmmo(ammoType, ammoAmount);
+            Destroy(gameObject);
+        }
+        
     }
-
 }
