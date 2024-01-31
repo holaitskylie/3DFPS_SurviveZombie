@@ -37917,7 +37917,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542943712}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.5158079, y: -0.3708035, z: 0.26345798, w: 0.72597307}
+  m_LocalRotation: {x: 0.515808, y: -0.37080348, z: 0.26345792, w: 0.72597307}
   m_LocalPosition: {x: -14.018003, y: 18.115545, z: -8.206646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -48231,6 +48231,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   joystick: {fileID: 155633731}
   fpsCam: {fileID: 1711179169}
+  player: {fileID: 526380825}
   rotationHorizontal: 0
   rotationVertical: 0
   rotationSpeed: 35
