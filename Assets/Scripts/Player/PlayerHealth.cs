@@ -61,7 +61,7 @@ public class PlayerHealth : Entity
 
         playerAudioPlayer.PlayOneShot(deatClip);
         controller.enabled = false;
-        //GetComponent<DeathHandler>().HandleDeath();
+        GetComponent<DeathHandler>().HandleDeath();
 
         animator.SetTrigger("Die");
         weapon.gameObject.SetActive(false);
