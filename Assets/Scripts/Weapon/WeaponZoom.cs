@@ -16,6 +16,7 @@ public class WeaponZoom : MonoBehaviour
     private void Start()
     {
         animator = GetComponent<Animator>();
+        zoomOut = fpsCam.m_Lens.FieldOfView;        
     }
 
     private void OnDisable()

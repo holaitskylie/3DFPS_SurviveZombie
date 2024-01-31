@@ -29704,7 +29704,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1193224686
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37800,7 +37800,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1542943712}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.515808, y: -0.37080348, z: 0.26345792, w: 0.72597307}
+  m_LocalRotation: {x: 0.5158079, y: -0.3708035, z: 0.26345798, w: 0.72597307}
   m_LocalPosition: {x: -14.018003, y: 18.115545, z: -8.206646}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -53064,6 +53064,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 996444542899882371, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
+      propertyPath: m_Lens.FieldOfView
+      value: 50
+      objectReference: {fileID: 0}
     - target: {fileID: 1491543538896796839, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalPosition.x
       value: 1.3825788
@@ -53158,7 +53162,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613925, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: field of view
-      value: 40
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5756955633349008502, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: impactCanvas
@@ -53329,6 +53333,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 8997996946275538679}
+    - target: {fileID: 3249512724898128107, guid: 67aaf1c33e74b6143a4618e4076a5b57, type: 3}
+      propertyPath: damage
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7851180992231272679, guid: 67aaf1c33e74b6143a4618e4076a5b57, type: 3}
       propertyPath: m_Name
       value: Enemy
