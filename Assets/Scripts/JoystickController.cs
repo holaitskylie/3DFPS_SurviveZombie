@@ -27,14 +27,23 @@ public class JoystickController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rotationVertical = joystick.Vertical;
-        rotationHorizontal = joystick.Horizontal;
+        //Way1. 플레이어와 자식 오브젝트인 카메라의 회전값을 다르게 주는 경우
+        //rotationVertical = joystick.Vertical;       
+        //rotationHorizontal = joystick.Horizontal;        
         
-        //Point : 카메라 앵글
         //fpsCam.transform.Rotate(-rotationVertical * rotationSpeed * Time.deltaTime, rotationHorizontal * rotationSpeed * Time.deltaTime, 0);
 
-        player.transform.Rotate(0, rotationHorizontal * rotationSpeed * Time.deltaTime, 0);
-        fpsCam.transform.Rotate(-rotationVertical * rotationSpeed * Time.deltaTime, 0, 0);
+        //player.transform.Rotate(0, rotationHorizontal * rotationSpeed * Time.deltaTime, 0);
+        //fpsCam.transform.Rotate(-rotationVertical * rotationSpeed * Time.deltaTime, 0, 0);       
+
+        //Way2. 조이스틱 축 값을 누적하여 쿼터니언에 적용
+        rotationVertical += joystick.Vertical * rotationSpeed * Time.deltaTime;
+        rotationHorizontal += joystick.Horizontal * rotationSpeed * Time.deltaTime;
+        
+        fpsCam.transform.localRotation = Quaternion.AngleAxis(rotationHorizontal, Vector3.up);
+        fpsCam.transform.localRotation *= Quaternion.AngleAxis(rotationVertical, Vector3.left);
+
+        rotationVertical = Mathf.Clamp(rotationVertical, -70, 70);
         
     }
 
