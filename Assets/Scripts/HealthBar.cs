@@ -7,21 +7,34 @@ public class HealthBar : MonoBehaviour
 {
     private EnemyHealth enemy;
     [SerializeField] private Slider hpBar;
-    [SerializeField] private GameObject playerCam;
+    [SerializeField] private Camera playerCam;
 
     private void Start()
     {
-        hpBar.maxValue = 
+        enemy = GetComponentInParent<EnemyHealth>();
+        hpBar = GetComponentInChildren<Slider>(); 
+        hpBar.maxValue = enemy.startingHealth;
+
+        playerCam = Camera.main;
+        
     }
 
     void Update()
     {
         transform.rotation = Quaternion.LookRotation(transform.position - playerCam.transform.position);
+        UpdateHealthBar();
         
     }
 
-    public void UpdateHealthMar(float maxHealth, float currentHealth)
+    public void UpdateHealthBar()
     {
+        hpBar.value = enemy.currentHealth;
 
+        if(enemy.currentHealth <= 0)
+        {
+            hpBar.value = 0;
+            //hpBar.enabled = false;
+            hpBar.gameObject.SetActive(false);
+        }
     }
 }
