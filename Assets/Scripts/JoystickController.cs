@@ -6,11 +6,16 @@ using Cinemachine;
 public class JoystickController : MonoBehaviour
 {
     public Joystick joystick;
+
+    [Header("Camera Settings")]
     [SerializeField] private CinemachineVirtualCamera fpsCam;
     [SerializeField] private GameObject player;
     [SerializeField] private float rotationHorizontal;
     [SerializeField] private float rotationVertical;
     [SerializeField] private float rotationSpeed = 35f;
+
+    [Header("Gun Settings")]
+    [SerializeField] private WeaponSwitcher weaponSwitcher;
     
     void Start()
     {
@@ -30,5 +35,11 @@ public class JoystickController : MonoBehaviour
         player.transform.Rotate(0, rotationHorizontal * rotationSpeed * Time.deltaTime, 0);
         fpsCam.transform.Rotate(-rotationVertical * rotationSpeed * Time.deltaTime, 0, 0);
         
+    }
+
+    public void ChangeGunIndex()
+    {
+        weaponSwitcher.ChangeGun();
+        weaponSwitcher.SetWeaponActive();
     }
 }

@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponSwitcher : MonoBehaviour
 {
-    [SerializeField] private int currentWeapon = 0;
+    [SerializeField] public int currentWeapon = 0;
 
     private void Start()
     {        
@@ -12,7 +12,7 @@ public class WeaponSwitcher : MonoBehaviour
     }
 
     //현재 선택된 무기를 활성화하고 나머지 무기들은 비활성화
-    private void SetWeaponActive()
+    public void SetWeaponActive()
     {
         int weaponIndex = 0;
 
@@ -37,10 +37,20 @@ public class WeaponSwitcher : MonoBehaviour
 
         //마우스 휠에 따라 currentWeapon 값 갱신(무기 교체)
         ProcessScrollWheel();
+        
 
         //currentWeapon 값이 변경되면 다음 메서드를 호출하여 새로운 무기 활성화
         if (previousWeapon != currentWeapon)
             SetWeaponActive();
+    }
+
+    public void ChangeGun()
+    {
+        if (currentWeapon >= transform.childCount - 1)
+            currentWeapon = 0;
+        else
+            currentWeapon++;
+
     }
         
     private void ProcessKeyInput()
