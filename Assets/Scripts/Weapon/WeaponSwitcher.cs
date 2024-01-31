@@ -30,14 +30,12 @@ public class WeaponSwitcher : MonoBehaviour
     private void Update()
     {
         int previousWeapon = currentWeapon;
-
-        //TODO : 키보드  Key 말고 버튼으로 교체하도록 변경
+        
         //키보드 키 입력에 따라 currentWeapon 값 갱신(무기 교체)
         ProcessKeyInput();
 
         //마우스 휠에 따라 currentWeapon 값 갱신(무기 교체)
-        ProcessScrollWheel();
-        
+        ProcessScrollWheel();        
 
         //currentWeapon 값이 변경되면 다음 메서드를 호출하여 새로운 무기 활성화
         if (previousWeapon != currentWeapon)
@@ -46,6 +44,7 @@ public class WeaponSwitcher : MonoBehaviour
 
     public void ChangeGun()
     {
+        //Change 버튼이 눌리면 현재 총 교체
         if (currentWeapon >= transform.childCount - 1)
             currentWeapon = 0;
         else

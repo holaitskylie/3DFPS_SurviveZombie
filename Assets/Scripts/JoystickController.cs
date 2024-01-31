@@ -16,6 +16,7 @@ public class JoystickController : MonoBehaviour
 
     [Header("Gun Settings")]
     [SerializeField] private WeaponSwitcher weaponSwitcher;
+    [SerializeField] public bool shootToggle = false;
     
     void Start()
     {
@@ -35,6 +36,14 @@ public class JoystickController : MonoBehaviour
         player.transform.Rotate(0, rotationHorizontal * rotationSpeed * Time.deltaTime, 0);
         fpsCam.transform.Rotate(-rotationVertical * rotationSpeed * Time.deltaTime, 0, 0);
         
+    }
+
+    public void Shoot()
+    {
+        Debug.Log("shoot toggle : " + shootToggle);
+
+        shootToggle = true;
+        Debug.Log("shoot toggle is now : " + shootToggle);        
     }
 
     public void ChangeGunIndex()

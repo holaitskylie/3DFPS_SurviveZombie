@@ -3,8 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class Weapon : MonoBehaviour
-{
+{   
     private PlayerHealth health;
+    private JoystickController joystick;
 
     [Header("Gun Settings")]
     [SerializeField] Camera FPSCam;
@@ -29,12 +30,13 @@ public class Weapon : MonoBehaviour
     {
         canShoot = true;
     }
-
+     
     private void Start()
     {
         gunAudioPlayer = GetComponent<AudioSource>();
 
-        health = FindObjectOfType<PlayerHealth>();       
+        health = FindObjectOfType<PlayerHealth>();
+        joystick = FindObjectOfType<JoystickController>();
        
     }
 
@@ -45,8 +47,13 @@ public class Weapon : MonoBehaviour
             return;
         }
 
-        if (Input.GetButtonDown("Fire1") && canShoot == true)
+       /* if (Input.GetButtonDown("Fire1") && canShoot == true)
         {            
+            StartCoroutine(Shoot());
+        }*/
+
+        if(joystick.shootToggle == true && canShoot == true)
+        {
             StartCoroutine(Shoot());
         }
         
@@ -69,6 +76,7 @@ public class Weapon : MonoBehaviour
         yield return new WaitForSeconds(shotCooldown);
 
         canShoot = true;
+        joystick.shootToggle = false;
     }
 
     private void PlayShotEffect()
