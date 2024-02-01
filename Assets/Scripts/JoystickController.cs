@@ -17,11 +17,14 @@ public class JoystickController : MonoBehaviour
     [Header("Gun Settings")]
     [SerializeField] private WeaponSwitcher weaponSwitcher;
     [SerializeField] public bool shootToggle = false;
+    [SerializeField] private GameObject[] gunImages;
     
     void Start()
     {
         if(player == null)
-            player = GameObject.Find("Player");        
+            player = GameObject.Find("Player");
+
+        SetGunImages();
     }
 
     // Update is called once per frame
@@ -59,5 +62,17 @@ public class JoystickController : MonoBehaviour
     {
         weaponSwitcher.ChangeGun();
         weaponSwitcher.SetWeaponActive();
+        SetGunImages();
+    }
+
+    private void SetGunImages()
+    {       
+        for(int i = 0; i < gunImages.Length; i++)
+        {
+            if (i == weaponSwitcher.currentWeapon)
+                gunImages[i].gameObject.SetActive(true);
+            else
+                gunImages[i].gameObject.SetActive(false);
+        }
     }
 }
