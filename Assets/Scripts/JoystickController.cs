@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using Cinemachine;
 
 public class JoystickController : MonoBehaviour
@@ -18,13 +19,16 @@ public class JoystickController : MonoBehaviour
     [SerializeField] private WeaponSwitcher weaponSwitcher;
     [SerializeField] public bool shootToggle = false;
     [SerializeField] private GameObject[] gunImages;
+    [SerializeField] private GameObject[] bulletImages;
+    [SerializeField] private Text ammoAmount;
     
     void Start()
     {
         if(player == null)
             player = GameObject.Find("Player");
 
-        SetGunImages();
+        SetImages();
+        SetAmmoText();
     }
 
     // Update is called once per frame
@@ -47,32 +51,48 @@ public class JoystickController : MonoBehaviour
         fpsCam.transform.localRotation *= Quaternion.AngleAxis(rotationVertical, Vector3.left);
 
         rotationVertical = Mathf.Clamp(rotationVertical, -70, 70);
+
+        SetAmmoText();
         
     }
 
     public void Shoot()
-    {
-        Debug.Log("shoot toggle : " + shootToggle);
-
-        shootToggle = true;
-        Debug.Log("shoot toggle is now : " + shootToggle);        
+    {      
+        shootToggle = true;               
     }
 
     public void ChangeGunIndex()
     {
         weaponSwitcher.ChangeGun();
         weaponSwitcher.SetWeaponActive();
-        SetGunImages();
+        SetImages();
+        SetAmmoText();
     }
 
-    private void SetGunImages()
-    {       
+    private void SetImages()
+    {        
         for(int i = 0; i < gunImages.Length; i++)
         {
             if (i == weaponSwitcher.currentWeapon)
+            {
                 gunImages[i].gameObject.SetActive(true);
+                bulletImages[i].gameObject.SetActive(true);
+            }
             else
+            {
                 gunImages[i].gameObject.SetActive(false);
+                bulletImages[i].gameObject.SetActive(false);
+            }
         }
+    }
+
+    private void SetAmmoText()
+    {
+        Ammo slot = player.GetComponent<Ammo>();
+
+        if(weaponSwitcher.currentWeapon == 0)
+            ammoAmount.text = slot.GetCurrentAmmo(AmmoType.Bullets).ToString();
+        else if(weaponSwitcher.currentWeapon == 1)
+            ammoAmount.text = slot.GetCurrentAmmo(AmmoType.Shells).ToString();
     }
 }
