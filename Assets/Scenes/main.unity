@@ -8123,7 +8123,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.9448242, y: 2.503662}
-  m_SizeDelta: {x: 1500, y: 340}
+  m_SizeDelta: {x: 1600, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &251011453
 MonoBehaviour:
@@ -18775,7 +18775,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1500, y: 340}
+  m_SizeDelta: {x: 1600, y: 340}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &739986436
 MonoBehaviour:
@@ -30291,8 +30291,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dialogue:
     dialogueLines:
-    - line: The Supoort party is coming to save you. 0
-    - line: Survie from zombies until the party arrvied! 1
+    - line: The Support party is coming to save you. 0
+    - line: Survive from zombies until the party arrvied! 1
 --- !u!4 &1166713483
 Transform:
   m_ObjectHideFlags: 0
