@@ -24,10 +24,17 @@ public class EnemyHealth : Entity
     [SerializeField] private float chaseRange = 5f; //target과의 거리
     private float distanceToTarget = Mathf.Infinity;
     private bool isProvoked = false;
-    
 
-    private void Awake()
+    private void Start()
     {
+        StartCoroutine("GameManagerInitializtion");
+    }
+
+    IEnumerator GameManagerInitializtion()
+    {
+        while(GameManager.instance == null)
+            yield return null;
+
         animator = GetComponent<Animator>();
         enemyAudioPlayer = GetComponent<AudioSource>();
         navMeshAgent = GetComponent<NavMeshAgent>();
@@ -35,6 +42,7 @@ public class EnemyHealth : Entity
         player = FindObjectOfType<PlayerHealth>();
         target = player.transform;
     }
+        
     
     public void Setup(float newHealth, float newDamage)
     {

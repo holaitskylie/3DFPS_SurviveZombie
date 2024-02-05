@@ -16,4 +16,18 @@ public class SceneLoader : MonoBehaviour
     {
         Application.Quit();
     }
+
+    public void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Helicopter"))
+        {
+            StartCoroutine("LoadGameScene");
+        }
+    }
+
+    IEnumerator LoadGameScene()
+    {
+        yield return new WaitForSeconds(2f);
+        SceneManager.LoadScene("main");
+    }
 }

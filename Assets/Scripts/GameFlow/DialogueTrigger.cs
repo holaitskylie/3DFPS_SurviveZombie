@@ -17,16 +17,6 @@ public class Dialogue
 
 public class DialogueTrigger : MonoBehaviour
 {
-    public Dialogue dialogue;
-
-    private void Start()
-    {
-        //TriggerDialogue();
-    }
-
-    public void TriggerDialogue()
-    {
-        GameManager.instance.StartDialogue(dialogue);
-    }
+    public Dialogue dialogue;    
 
 }

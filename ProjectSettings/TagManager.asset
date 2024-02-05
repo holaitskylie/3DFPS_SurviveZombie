@@ -6,6 +6,7 @@ TagManager:
   tags:
   - CinemachineTarget
   - Boss
+  - Helicopter
   layers:
   - Default
   - TransparentFX

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Weapon : MonoBehaviour
 {   
@@ -30,15 +31,25 @@ public class Weapon : MonoBehaviour
     {
         canShoot = true;
     }
-     
+
     private void Start()
     {
+        StartCoroutine("GameManagerInitializtion");
+    }
+
+    IEnumerator GameManagerInitializtion()
+    {
+        while (GameManager.instance == null)
+            yield return null;
+
         gunAudioPlayer = GetComponent<AudioSource>();
 
         health = FindObjectOfType<PlayerHealth>();
         joystick = FindObjectOfType<JoystickController>();
-       
+
+
     }
+       
 
     void Update()
     {
