@@ -21,8 +21,11 @@ public class EnemySpawner : MonoBehaviour
 
     void Update()
     {
-        //TODO: Game Manager 생성
-        // if (GameManager.instance != null && GameManager.instance.isGameOver) return;
+        if (GameManager.instance != null && GameManager.instance.isDialogueActive)
+            return;
+
+        if (GameManager.instance.isGameOver) 
+            return;
 
         //적을 모두 물리친 경우 다음 스폰 진행
         if (enemies.Count <= 0)
