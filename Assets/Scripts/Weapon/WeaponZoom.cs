@@ -9,14 +9,21 @@ public class WeaponZoom : MonoBehaviour
     [SerializeField] private CinemachineVirtualCamera fpsCam;
     [SerializeField] private float zoomOut = 40f;
     [SerializeField] private float zoomIn = 20f;
-    [SerializeField] private Animator animator;
+    private Animator animator;
 
     private bool zoomToggle = false;
 
     private void Start()
-    {
+    {     
+        zoomOut = fpsCam.m_Lens.FieldOfView;      
         animator = GetComponent<Animator>();
-        zoomOut = fpsCam.m_Lens.FieldOfView;        
+    }
+
+    private void OnEnable()
+    {
+        if(animator == null)
+            animator = GetComponent<Animator>();
+            
     }
 
     private void OnDisable()

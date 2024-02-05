@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using StarterAssets;
 
 public class PlayerHealth : Entity
@@ -8,7 +9,7 @@ public class PlayerHealth : Entity
     private FirstPersonController controller;
     [SerializeField] private GameObject weapon;
     [SerializeField] private Animator animator;
-    [SerializeField] private CameraManager cameraManager;
+    [SerializeField] private CameraManager cameraManager;    
 
     [Header("Sounds")]
     private AudioSource playerAudioPlayer;
@@ -19,7 +20,7 @@ public class PlayerHealth : Entity
     private void Awake()
     {
         playerAudioPlayer = GetComponent<AudioSource>();
-        controller = GetComponent<FirstPersonController>();
+        controller = GetComponent<FirstPersonController>();        
     }
 
     protected override void OnEnable()
