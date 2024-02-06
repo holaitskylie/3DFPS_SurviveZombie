@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+    private SceneLoader sceneLoader;
     
     [Header("Mission UI")]
     [SerializeField] private Canvas missionCanvas;
@@ -17,7 +18,9 @@ public class GameManager : MonoBehaviour
     public float typingSpeed = 0.2f;
 
     public bool isGameOver = false;
+    public bool didPlayerWin = false;
     private PlayerHealth player;
+    private EnemySpawner enemySpawner;
 
     private void Awake()
     {
@@ -29,6 +32,8 @@ public class GameManager : MonoBehaviour
     private void Start()
     {
         player = FindObjectOfType<PlayerHealth>();
+        enemySpawner = FindObjectOfType<EnemySpawner>();
+        sceneLoader = GetComponent<SceneLoader>();
         dialogueTrigger = GetComponent<DialogueTrigger>();
         missionAnim = missionCanvas.GetComponentInChildren<Animator>();
         
@@ -55,7 +60,12 @@ public class GameManager : MonoBehaviour
             isGameOver = true;            
         }
 
+        if (didPlayerWin && enemySpawner.enemies.Count <= 0)
+            PlayerWin();
+
     }
+
+    #region Mission
 
     public void StartDialogue(Dialogue dialogue)
     {
@@ -112,7 +122,6 @@ public class GameManager : MonoBehaviour
 
     }
 
-
     private void EndDialogue()
     {
         missionAnim.Play("MissionEndAnim");
@@ -120,6 +129,12 @@ public class GameManager : MonoBehaviour
         isDialogueActive = false;
     }
 
+    #endregion
+
+    public void PlayerWin()
+    {
+        sceneLoader.ReloadGame();
+    }
 
 
 }

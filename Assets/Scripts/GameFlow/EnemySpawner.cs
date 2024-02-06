@@ -14,7 +14,7 @@ public class EnemySpawner : MonoBehaviour
     [SerializeField] private float healthMin = 80f;
 
     public Transform[] spawnPoints;
-    [SerializeField] private List<GameObject> enemies = new List<GameObject>();
+    public List<GameObject> enemies = new List<GameObject>();
     [SerializeField] private int wave;
     [SerializeField] private int endWave = 2;
 
@@ -24,7 +24,7 @@ public class EnemySpawner : MonoBehaviour
         if (GameManager.instance != null && GameManager.instance.isDialogueActive)
             return;
 
-        if (GameManager.instance.isGameOver) 
+        if (GameManager.instance.isGameOver || GameManager.instance.didPlayerWin) 
             return;
 
         //적을 모두 물리친 경우 다음 스폰 진행
@@ -99,11 +99,17 @@ public class EnemySpawner : MonoBehaviour
 
         enemies.Add(boss);
         bossHealth.onDeath += () => OnEnemyDeath(boss);
+        bossHealth.onDeath += () => StartEndScene();
     }
 
     private void OnEnemyDeath(GameObject enemy)
     {
         enemies.Remove(enemy);
         Destroy(enemy.gameObject, 5f);
+    }
+
+    private void StartEndScene()
+    {
+        GameManager.instance.didPlayerWin = true;
     }
 }

@@ -32,10 +32,10 @@ public class WeaponSwitcher : MonoBehaviour
         int previousWeapon = currentWeapon;
         
         //키보드 키 입력에 따라 currentWeapon 값 갱신(무기 교체)
-        ProcessKeyInput();
+        //ProcessKeyInput();
 
         //마우스 휠에 따라 currentWeapon 값 갱신(무기 교체)
-        ProcessScrollWheel();        
+        //ProcessScrollWheel();        
 
         //currentWeapon 값이 변경되면 다음 메서드를 호출하여 새로운 무기 활성화
         if (previousWeapon != currentWeapon)
