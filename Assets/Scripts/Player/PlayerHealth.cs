@@ -5,8 +5,7 @@ using UnityEngine.UI;
 using StarterAssets;
 
 public class PlayerHealth : Entity
-{
-    private FirstPersonController controller;
+{    
     [SerializeField] private GameObject weapon;
     [SerializeField] private Animator animator;
     [SerializeField] private CameraManager cameraManager;    
@@ -19,16 +18,9 @@ public class PlayerHealth : Entity
 
     private void Awake()
     {
-        playerAudioPlayer = GetComponent<AudioSource>();
-        controller = GetComponent<FirstPersonController>();        
+        playerAudioPlayer = GetComponent<AudioSource>();        
     }
-
-    protected override void OnEnable()
-    {
-        base.OnEnable();
-
-        controller.enabled = true;
-    }
+       
 
     public bool IsDead()
     {
@@ -60,8 +52,7 @@ public class PlayerHealth : Entity
     {
         base.Die();
 
-        playerAudioPlayer.PlayOneShot(deatClip);
-        controller.enabled = false;
+        playerAudioPlayer.PlayOneShot(deatClip);       
         GetComponent<DeathHandler>().HandleDeath();
 
         animator.SetTrigger("Die");

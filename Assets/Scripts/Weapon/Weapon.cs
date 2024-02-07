@@ -1,11 +1,10 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
 public class Weapon : MonoBehaviour
 {   
-    private PlayerHealth health;
     private JoystickController joystick;
 
     [Header("Gun Settings")]
@@ -13,15 +12,12 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float range = 100f;
     [SerializeField] private float damage = 30f;
     [SerializeField] private ParticleSystem muzzleFx;
-    //[SerializeField] private ParticleSystem shellFX;
-
     [SerializeField] private float shotCooldown = 0.5f;
     private bool canShoot = true;
 
     [Header("Sounds")]
-    private AudioSource gunAudioPlayer; //ÃÑ ¼Ò¸® Àç»ı±â
-    [SerializeField] private AudioClip shotClip; //¹ß»ç ¼Ò¸®
-    //[SerializeField] private AudioClip reloadClip; //ÀçÀåÀü ¼Ò¸®
+    private AudioSource gunAudioPlayer; //ì´ ì†Œë¦¬ ì¬ìƒê¸°
+    [SerializeField] private AudioClip shotClip; //ë°œì‚¬ ì†Œë¦¬
 
     [Header("Ammo")]
     [SerializeField] private Ammo ammoSlot;
@@ -42,21 +38,16 @@ public class Weapon : MonoBehaviour
         while (GameManager.instance == null)
             yield return null;
 
-        gunAudioPlayer = GetComponent<AudioSource>();
-
-        health = FindObjectOfType<PlayerHealth>();
+        gunAudioPlayer = GetComponent<AudioSource>();       
         joystick = FindObjectOfType<JoystickController>();
-
 
     }
        
 
     void Update()
     {
-        if (health.IsDead())
-        {
-            return;
-        }
+        if (GameManager.instance.isDialogueActive || GameManager.instance.isGameOver)
+            return;       
 
        /* if (Input.GetButtonDown("Fire1") && canShoot == true)
         {            
@@ -64,9 +55,7 @@ public class Weapon : MonoBehaviour
         }*/
 
         if(joystick.shootToggle == true && canShoot == true)
-        {
-            StartCoroutine(Shoot());
-        }
+            StartCoroutine(Shoot());     
         
     }
 
@@ -74,9 +63,9 @@ public class Weapon : MonoBehaviour
     {
         canShoot = false;
 
-        //ÃÑ¸¶´Ù ¾î¶² Åº¾àÀ» »ç¿ëÇÒ °ÍÀÎÁö¿¡ ´ëÇÑ ¼³Á¤À» °¡Áö°í ÀÖÀ½
-        //Gun ÇÁ¸®ÆÕ¿¡ ¼³Á¤µÇ¾î ÀÖ´Â ammoTypeÀ» ÀÎÀÚ°ªÀ¸·Î ³Ö¾î
-        //PlayerÀÇ Åº¾à ½½·Ô¿¡¼­ ÇöÀç Åº¾àÀÇ ¼ö¸¦ °¡Á®¿Â´Ù
+        //ì´ë§ˆë‹¤ ì–´ë–¤ íƒ„ì•½ì„ ì‚¬ìš©í•  ê²ƒì¸ì§€ì— ëŒ€í•œ ì„¤ì •ì„ ê°€ì§€ê³  ìˆìŒ
+        //Gun í”„ë¦¬íŒ¹ì— ì„¤ì •ë˜ì–´ ìˆëŠ” ammoTypeì„ ì¸ìê°’ìœ¼ë¡œ ë„£ì–´
+        //Playerì˜ íƒ„ì•½ ìŠ¬ë¡¯ì—ì„œ í˜„ì¬ íƒ„ì•½ì˜ ìˆ˜ë¥¼ ê°€ì ¸ì˜¨ë‹¤
         if(ammoSlot.GetCurrentAmmo(ammoType) > 0)
         {            
             ProcessRaycast();
@@ -92,13 +81,10 @@ public class Weapon : MonoBehaviour
 
     private void PlayShotEffect()
     {
-        //ÃÑ±¸ È­¿° ÀÌÆåÆ® Àç»ı
-        muzzleFx.Play();
+        //ì´êµ¬ í™”ì—¼ ì´í™íŠ¸ ì¬ìƒ
+        muzzleFx.Play();       
 
-        //ÅºÇÇ ¹èÃâ ÀÌÆåÆ® Àç»ı
-        //shellFX.Play();
-
-        //ÃÑ°İ ¼Ò¸® Àç»ı
+        //ì´ê²© ì†Œë¦¬ ì¬ìƒ
         gunAudioPlayer.PlayOneShot(shotClip);
     }
 
@@ -106,28 +92,21 @@ public class Weapon : MonoBehaviour
     {
         RaycastHit hit;
 
-        //Åº¾ËÀÌ ¸ÂÀº °÷
+        //íƒ„ì•Œì´ ë§ì€ ê³³
         Vector3 hitPosition = Vector3.zero;
         
         if (Physics.Raycast(FPSCam.transform.position, FPSCam.transform.forward, out hit, range))
-        {
-            Debug.Log("I hit this thing : " + hit.transform.name);
-
-            if (hit.collider.CompareTag("Player")) return;           
+        {         
+            if (hit.collider.CompareTag("Player")) 
+                return;           
                 
             IDamageable target = hit.collider.GetComponent<IDamageable>();
 
             if (target != null)
-            {
                 target.OnDamage(damage, hit.point, hit.normal);
-            }
             else
-            {
-                Debug.Log("Target does not implement IDamageable: " + hit.collider.gameObject.name);
-                return;
-            }
-
-
+                return;         
+            
             hitPosition = hit.point;            
 
         }

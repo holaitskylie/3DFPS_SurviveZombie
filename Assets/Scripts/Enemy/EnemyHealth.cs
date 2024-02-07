@@ -4,12 +4,9 @@ using UnityEngine;
 using UnityEngine.AI;
 
 public class EnemyHealth : Entity
-{
-    //[SerializeField] private float hitPoints = 100f;
-    //private bool isDead = false;
+{     
     private Animator animator;
-    [SerializeField] private ParticleSystem hitFX;
-    
+    [SerializeField] private ParticleSystem hitFX;    
 
     [Header("Sounds")]
     private AudioSource enemyAudioPlayer;
@@ -139,10 +136,9 @@ public class EnemyHealth : Entity
             isProvoked = true;
 
         if(!isDead)
-        {
-            //Instantiate(hitFX, hitPoint, Quaternion.LookRotation(hitNormal));
-            
-            ParticleSystem effect = Instantiate(hitFX, hitPoint,Quaternion.LookRotation(hitNormal));
+        {          
+           
+            ParticleSystem effect = Instantiate(hitFX, hitPoint, Quaternion.LookRotation(hitNormal));
             if(effect != null)
             {
                 effect.Play();

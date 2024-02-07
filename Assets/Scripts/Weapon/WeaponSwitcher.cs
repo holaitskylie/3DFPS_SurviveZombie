@@ -29,13 +29,13 @@ public class WeaponSwitcher : MonoBehaviour
 
     private void Update()
     {
+        if (GameManager.instance.isDialogueActive || GameManager.instance.isGameOver)
+            return;
+
         int previousWeapon = currentWeapon;
         
         //키보드 키 입력에 따라 currentWeapon 값 갱신(무기 교체)
-        //ProcessKeyInput();
-
-        //마우스 휠에 따라 currentWeapon 값 갱신(무기 교체)
-        //ProcessScrollWheel();        
+        //ProcessKeyInput();        
 
         //currentWeapon 값이 변경되면 다음 메서드를 호출하여 새로운 무기 활성화
         if (previousWeapon != currentWeapon)
@@ -64,26 +64,6 @@ public class WeaponSwitcher : MonoBehaviour
             currentWeapon = 1;
         }
 
-    }
-
-    private void ProcessScrollWheel()
-    {
-        if(Input.GetAxis("Mouse ScrollWheel") < 0)
-        {
-            if (currentWeapon >= transform.childCount - 1)
-                currentWeapon = 0;
-            else
-                currentWeapon++;
-        }
-
-        if(Input.GetAxis("Mouse ScrollWheel") > 0)
-        {
-            if (currentWeapon <= 0)
-                currentWeapon = transform.childCount - 1;
-            else
-                currentWeapon--;
-        }
-       
-    }
+    } 
 
 }

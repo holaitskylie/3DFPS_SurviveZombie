@@ -16,6 +16,9 @@ public class PlayerMove : MonoBehaviour
     
     void Update()
     {
+        if (GameManager.instance.isDialogueActive || GameManager.instance.isGameOver)
+            return;
+
         Vector3 Move = transform.right * joystick.Horizontal + transform.forward * joystick.Vertical;
         controller.Move(Move * moveSpeed * Time.deltaTime);
 

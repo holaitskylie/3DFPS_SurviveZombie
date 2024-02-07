@@ -45,7 +45,7 @@ public class JoystickController : MonoBehaviour
     }    
 
     public void Shoot()
-    {      
+    {     
         shootToggle = true;               
     }
 
