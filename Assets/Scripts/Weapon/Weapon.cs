@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UI;
 
 public class Weapon : MonoBehaviour
 {   
@@ -11,7 +12,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] Camera FPSCam;
     [SerializeField] private float range = 100f;
     [SerializeField] private float damage = 30f;
-    [SerializeField] private ParticleSystem muzzleFx;
+    //[SerializeField] private ParticleSystem muzzleFx;
     [SerializeField] private float shotCooldown = 0.5f;
     private bool canShoot = true;
 
@@ -22,6 +23,10 @@ public class Weapon : MonoBehaviour
     [Header("Ammo")]
     [SerializeField] private Ammo ammoSlot;
     [SerializeField] private AmmoType ammoType;
+
+    [Header("UI")]
+    public Image crossHair;
+    private Color originColor;
 
     private void OnEnable()
     {
@@ -40,6 +45,8 @@ public class Weapon : MonoBehaviour
 
         gunAudioPlayer = GetComponent<AudioSource>();       
         joystick = FindObjectOfType<JoystickController>();
+
+        originColor = crossHair.color;
 
     }
        
@@ -82,7 +89,7 @@ public class Weapon : MonoBehaviour
     private void PlayShotEffect()
     {
         //총구 화염 이펙트 재생
-        muzzleFx.Play();       
+        //muzzleFx.Play();       
 
         //총격 소리 재생
         gunAudioPlayer.PlayOneShot(shotClip);
@@ -103,9 +110,16 @@ public class Weapon : MonoBehaviour
             IDamageable target = hit.collider.GetComponent<IDamageable>();
 
             if (target != null)
+            {
                 target.OnDamage(damage, hit.point, hit.normal);
+                crossHair.color = Color.yellow;
+            }
             else
-                return;         
+            {
+                crossHair.color = originColor;
+                return;
+            }
+                         
             
             hitPosition = hit.point;            
 

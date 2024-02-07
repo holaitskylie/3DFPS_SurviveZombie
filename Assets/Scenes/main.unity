@@ -4764,7 +4764,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!223 &147789265
 Canvas:
   m_ObjectHideFlags: 0
@@ -27227,6 +27227,7 @@ GameObject:
   - component: {fileID: 1045143564}
   - component: {fileID: 1045143563}
   - component: {fileID: 1045143562}
+  - component: {fileID: 1045143565}
   m_Layer: 0
   m_Name: Crosshair
   m_TagString: Untagged
@@ -27306,6 +27307,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1045143560}
   m_CullTransparentMesh: 1
+--- !u!114 &1045143565
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1045143560}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 17331472df1440a45b5205dd2e23d2ae, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerCam: {fileID: 1167380810}
+  range: 100
+  target: {fileID: 0}
+  crosshairImage: {fileID: 1045143563}
 --- !u!1001 &1050339708
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -30122,6 +30139,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sceneNumber: 3
+--- !u!20 &1167380810 stripped
+Camera:
+  m_CorrespondingSourceObject: {fileID: 5018793569636613925, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
+  m_PrefabInstance: {fileID: 1674236765529126342}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1171147729
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -49824,7 +49846,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1939364395
 RectTransform:
   m_ObjectHideFlags: 0
@@ -53340,7 +53362,7 @@ RectTransform:
   m_Father: {fileID: 88459020}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
+  m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 10, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -55161,6 +55183,10 @@ PrefabInstance:
       propertyPath: joystick
       value: 
       objectReference: {fileID: 155633731}
+    - target: {fileID: 2483647412617932626, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
+      propertyPath: crossHair
+      value: 
+      objectReference: {fileID: 1045143563}
     - target: {fileID: 2678300596192502644, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: cameraManager
       value: 
@@ -55179,35 +55205,35 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613922, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -0.9260173
+      value: 0.20000005
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613922, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 3.2799997
+      value: 1.375
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613922, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.6700058
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613922, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.3708035
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613922, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0.263458
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613922, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.725973
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613922, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: m_LocalRotation.z
-      value: -0.515808
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 5018793569636613925, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: field of view
-      value: 60.000004
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 5756955633349008502, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       propertyPath: impactCanvas
@@ -55229,6 +55255,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7290503056738895815, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
+      propertyPath: crossHair
+      value: 
+      objectReference: {fileID: 1045143563}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
