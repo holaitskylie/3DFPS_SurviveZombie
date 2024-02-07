@@ -35,12 +35,7 @@ public class CrosshairController : MonoBehaviour
 
         if(Physics.Raycast(ray, out hit, range))
         {
-            target = hit.transform.gameObject;
-
-            if(target != null)
-            {
-                Debug.Log(target.gameObject.name);                
-            }
+            target = hit.transform.gameObject;                      
 
             return target;
         }
@@ -52,21 +47,14 @@ public class CrosshairController : MonoBehaviour
     }
 
     public void SetColor()
-    {
-        
-
+    {      
         if (GetTarget() != null)
         {
-            if (GetTarget().gameObject.CompareTag("Enemy") || GetTarget().gameObject.CompareTag("Boss"))
+            if(GetTarget().gameObject.GetComponent<IDamageable>()!= null)
             {
-                Debug.Log("YES ENEMY");
+                Debug.Log("CAN SHOOTABLE");
                 crosshairImage.color = new Color32(255, 155, 0, 255);
-            }
-            else if (GetTarget().gameObject.CompareTag("Barrel"))
-            {
-                Debug.Log("THIS IS BARREL");
-                crosshairImage.color = new Color32(178, 255, 0, 255);
-            }
+            }           
             else
             {
                 crosshairImage.color = originColor;
