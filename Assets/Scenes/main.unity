@@ -50237,12 +50237,7 @@ MonoBehaviour:
   moveSpeed: 5
   fixedTouchField: {fileID: 1855275234}
   cameraManager: {fileID: 512405392}
-  fpsCam: {fileID: 1711179169}
   player: {fileID: 526380825}
-  rotationHorizontal: 0
-  rotationVertical: 0
-  rotationSpeed: 70
-  camSensivity: 40
   weaponSwitcher: {fileID: 829827223}
   shootToggle: 0
   gunImages:
@@ -53443,7 +53438,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 100264, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 400052, guid: dd6ec75974b69a3409711f8110698bbb, type: 3}
       propertyPath: m_LocalRotation.w
@@ -55761,7 +55756,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 7365403266776387708, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4048854266536099867, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
     m_AddedGameObjects:
     - targetCorrespondingSourceObject: {fileID: 1491543538896796839, guid: 3366add3b51acf148b60861cf64dc158, type: 3}
       insertIndex: 0

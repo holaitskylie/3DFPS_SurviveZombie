@@ -14,16 +14,10 @@ public class JoystickController : MonoBehaviour
 
     [Header("Camera Settings")]
     [SerializeField] private FixedTouchField fixedTouchField;
-    [SerializeField] private CameraManager cameraManager;
-    [SerializeField] private CinemachineVirtualCamera fpsCam;
-    [SerializeField] private GameObject player;
-    [SerializeField] private float rotationHorizontal;
-    [SerializeField] private float rotationVertical;
-    [SerializeField] private float rotationSpeed = 35f;
-    [SerializeField] private float camSensivity = 40f;
-    private Vector2 lockAxis;
-
+    [SerializeField] private CameraManager cameraManager;   
+   
     [Header("Gun Settings")]
+    [SerializeField] private GameObject player;
     [SerializeField] private WeaponSwitcher weaponSwitcher;
     [SerializeField] public bool shootToggle = false;
     [SerializeField] private GameObject[] gunImages;
@@ -40,51 +34,15 @@ public class JoystickController : MonoBehaviour
         SetImages();
         SetAmmoText();
     }
-
-    // Update is called once per frame
+       
     void Update()
-    {
-        //Vector3 Move = transform.right * joystick.Horizontal + transform.forward * joystick.Vertical;
-
-        //characterController.Move(Move * moveSpeed * Time.deltaTime);
-
-
-        //Way1. 플레이어와 자식 오브젝트인 카메라의 회전값을 다르게 주는 경우
-        //rotationVertical = joystick.Vertical;       
-        //rotationHorizontal = joystick.Horizontal;        
-
-        //fpsCam.transform.Rotate(-rotationVertical * rotationSpeed * Time.deltaTime, rotationHorizontal * rotationSpeed * Time.deltaTime, 0);
-
-        //player.transform.Rotate(0, rotationHorizontal * rotationSpeed * Time.deltaTime, 0);
-        //fpsCam.transform.Rotate(-rotationVertical * rotationSpeed * Time.deltaTime, 0, 0);       
-
-        //Way2. 조이스틱 축 값을 누적하여 쿼터니언에 적용
-        //rotationVertical += joystick.Vertical * rotationSpeed * Time.deltaTime;
-        //rotationHorizontal += joystick.Horizontal * rotationSpeed * Time.deltaTime;
-
-        //fpsCam.transform.localRotation = Quaternion.AngleAxis(rotationHorizontal, Vector3.up);
-        //fpsCam.transform.localRotation *= Quaternion.AngleAxis(rotationVertical, Vector3.left);
-
-        //rotationVertical = Mathf.Clamp(rotationVertical, -70, 70);
-
+    {       
         //touch sceen으로 카메라 조절
-        cameraManager.lockAxis = fixedTouchField.TouchDist;
-        //CameraControll();
+        cameraManager.lockAxis = fixedTouchField.TouchDist;        
 
         SetAmmoText();
 
-    }
-
-    private void CameraControll()
-    {
-        rotationHorizontal = lockAxis.x * camSensivity * Time.deltaTime;
-        rotationVertical = lockAxis.y * camSensivity * Time.deltaTime;
-        rotationSpeed -= rotationVertical;
-        rotationSpeed = Mathf.Clamp(rotationSpeed, -90f, 90f);
-
-        fpsCam.transform.localRotation = Quaternion.Euler(rotationSpeed, 0, 0);
-        player.transform.Rotate(Vector3.up * rotationHorizontal);
-    }
+    }    
 
     public void Shoot()
     {      
