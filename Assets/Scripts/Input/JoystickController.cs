@@ -38,7 +38,7 @@ public class JoystickController : MonoBehaviour
     void Update()
     {       
         //touch sceen으로 카메라 조절
-        cameraManager.lockAxis = fixedTouchField.TouchDist;        
+        cameraManager.lockAxis = fixedTouchField.touchDist;        
 
         SetAmmoText();
 

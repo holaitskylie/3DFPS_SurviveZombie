@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
@@ -7,26 +7,24 @@ public class CameraManager : MonoBehaviour
 {
     [SerializeField] CinemachineVirtualCamera[] virtualCams;
 
-    [SerializeField] CinemachineVirtualCamera playerCam;
     private CinemachineVirtualCamera currentCam;
-    [SerializeField] public CinemachineVirtualCamera deadCam;
+    [SerializeField] CinemachineVirtualCamera playerCam; //게임 진행 시 사용
+    [SerializeField] public CinemachineVirtualCamera deadCam; //플레이어 사망 연출 시 사용
     [SerializeField] private CinemachineDollyCart deadCamTrack;
 
     [Header("Touch Setting")]
     [SerializeField] private Transform player;
-    public Vector2 lockAxis;
+    public Vector2 lockAxis; //카메라 회전 감도 제어
+    private float xMove; //수평 회전량
+    private float yMove; //수직 회전량
+    [SerializeField] private float xRotation; //수직 회전 각도
     public float camSensivity = 40f;
-    private float xMove;
-    private float yMove;
-    private float xRotation;
-
     
-    // Start is called before the first frame update
     void Start()
     {    
         currentCam = playerCam;
 
-        //���� ī�޶� �켱���� ����
+        //가상 카메라 우선순위 설정
         for(int i = 0; i< virtualCams.Length; i++)
         {
             if (virtualCams[i] == currentCam)
@@ -39,12 +37,20 @@ public class CameraManager : MonoBehaviour
 
     private void Update()
     {
+        //수평 회전 감도 갱신
         xMove = lockAxis.x * camSensivity * Time.deltaTime;
+
+        //수직 회전 감도 갱신
         yMove = lockAxis.y * camSensivity * Time.deltaTime;
+
+        //카메라 수직 회전 제한
         xRotation -= yMove;
         xRotation = Mathf.Clamp(xRotation, -90f, 90f);
 
+        //카메라 로컬 회전 설정(x축 회전)
         playerCam.transform.localRotation = Quaternion.Euler(xRotation, 0, 0);
+
+        //플레이어를 수평 회전 입력값만큼 y축 회전
         player.Rotate(Vector3.up * xMove);
     }
 
@@ -61,10 +67,10 @@ public class CameraManager : MonoBehaviour
 
         if(currentCam == deadCam)
         {
-            // deadCam�� dolly track�� ���� �����̰� ����
+            // deadCam을 dolly track에 따라 움직이게 설정
             deadCam.Follow = deadCamTrack.transform;           
 
-            // dolly track �ʱ�ȭ
+            // dolly track 초기화
             deadCamTrack.m_Position = 0f;
         }
     }
