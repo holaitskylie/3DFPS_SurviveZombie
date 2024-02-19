@@ -35,7 +35,7 @@ public class WeaponZoom : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetMouseButtonDown(1))
+       /* if (Input.GetMouseButtonDown(1))
         {          
 
             if (zoomToggle == false)
@@ -47,7 +47,7 @@ public class WeaponZoom : MonoBehaviour
                 ZoomOut();
             }
 
-        }
+        }*/
         
     }
 
