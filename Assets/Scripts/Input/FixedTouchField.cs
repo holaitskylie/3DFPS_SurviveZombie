@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -6,52 +6,58 @@ using UnityEngine.EventSystems;
 public class FixedTouchField : MonoBehaviour , IPointerDownHandler, IPointerUpHandler
 {
     [HideInInspector]
-    public Vector2 touchDist; //ÀÌÀü°ú ÇöÀç ÅÍÄ¡ À§Ä¡°£ °Å¸® ÀúÀå
+    public Vector2 touchDist; //ì´ì „ê³¼ í˜„ìž¬ í„°ì¹˜ ìœ„ì¹˜ê°„ ê±°ë¦¬ ì €ìž¥
     [HideInInspector]
-    public Vector2 previousPointer; //ÀÌÀü ÅÍÄ¡ À§Ä¡ ÀúÀå
+    public Vector2 previousPointer; //ì´ì „ í„°ì¹˜ ìœ„ì¹˜ ì €ìž¥
     [HideInInspector]
-    protected int pointerId; //ÇöÀç ÅÍÄ¡ ½Äº°ÀÚ ÀúÀå
+    protected int pointerId; //í˜„ìž¬ í„°ì¹˜ ì‹ë³„ìž ì €ìž¥
     [HideInInspector]
     public bool isPressed;      
        
     void Update()
     {
-        //isPressed°¡ trueÀÏ ¶§, ¸¶¿ì½º ¶Ç´Â ÅÍÄ¡ ÀÔ·Â Ã³¸®
+        //isPressedê°€ trueì¼ ë•Œ, ë§ˆìš°ìŠ¤ ë˜ëŠ” í„°ì¹˜ ìž…ë ¥ ì²˜ë¦¬
         if (isPressed)
         {
             if (pointerId >= 0 && pointerId < Input.touches.Length)
             {
-                //¸ð¹ÙÀÏ ÅÍÄ¡ ÀÔ·Â Ã³¸®
+                //ëª¨ë°”ì¼ í„°ì¹˜ ìž…ë ¥ ì²˜ë¦¬
+                //í„°ì¹˜ê°€ ë°œìƒí–ˆì„ ë•Œ í„°ì¹˜ì˜ ìœ„ì¹˜ ë³€í™”ë¥¼ ê³„ì‚°
                 touchDist = Input.touches[pointerId].position - previousPointer;
+                
+                //í˜„ìž¬ í”„ë ˆìž„ í„°ì¹˜ ìœ„ì¹˜ë¥¼ ì €ìž¥
+                //ë‹¤ìŒ í”„ë ˆìž„ì—ì„œ ì´ì „ í”„ë ˆìž„ì˜ í„°ì¹˜ ìœ„ì¹˜ë¡œ ì‚¬ìš©
                 previousPointer = Input.touches[pointerId].position;
+
             }
             else
             {
-                //¸¶¿ì½º ÀÔ·Â Ã³¸®
+                //ë§ˆìš°ìŠ¤ ìž…ë ¥ ì²˜ë¦¬
                 touchDist = new Vector2(Input.mousePosition.x, Input.mousePosition.y) - previousPointer;
                 previousPointer = Input.mousePosition;
             }
         }
         else
         {
-            //touchDist ÃÊ±âÈ­
+            //touchDist ì´ˆê¸°í™”
             touchDist = new Vector2();
         }
     }
 
-    //IPointerDownHandler ÀÎÅÍÆäÀÌ½º ±¸Çö
+    //IPointerDownHandler ì¸í„°íŽ˜ì´ìŠ¤ êµ¬í˜„
     public void OnPointerDown(PointerEventData eventData)
     {
-        //ÅÍÄ¡°¡ ½ÃÀÛµÉ ¶§ È£Ãâ
-        isPressed = true;
-        pointerId = eventData.pointerId;
-        previousPointer = eventData.position;
+        //í„°ì¹˜ê°€ ì‹œìž‘ë  ë•Œ í˜¸ì¶œ && í„°ì¹˜ì˜ ì²« í”„ë ˆìž„ì—ì„œë§Œ ì‹¤í–‰
+
+        isPressed = true; //í„°ì¹˜ê°€ ì¼ì–´ë‚˜ê³  ìžˆìŒì„ ì•Œë¦¼
+        pointerId = eventData.pointerId; //UI ìš”ì†Œì—ì„œ ë°œìƒí•œ í„°ì¹˜ë¥¼ ì‹ë³„
+        previousPointer = eventData.position; //UI ìš”ì†Œì—ì„œ ë°œìƒí•œ í„°ì¹˜ì˜ ìœ„ì¹˜
     }
 
-    //IPointerUpHandler ÀÎÅÍÆäÀÌ½º ±¸Çö
+    //IPointerUpHandler ì¸í„°íŽ˜ì´ìŠ¤ êµ¬í˜„
     public void OnPointerUp(PointerEventData eventData)
     {
-        //ÅÍÄ¡°¡ ³¡³µÀ» ¶§ È£Ãâ
+        //í„°ì¹˜ê°€ ëë‚¬ì„ ë•Œ í˜¸ì¶œ
         isPressed = false;
     }
 }

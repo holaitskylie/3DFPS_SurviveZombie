@@ -12,9 +12,10 @@ public class CameraManager : MonoBehaviour
     [SerializeField] public CinemachineVirtualCamera deadCam; //플레이어 사망 연출 시 사용
     [SerializeField] private CinemachineDollyCart deadCamTrack;
 
-    [Header("Touch Setting")]
+    [Header("Touch Camera Setting")]
+    [SerializeField] private FixedTouchField fixedTouchField;
     [SerializeField] private Transform player;
-    public Vector2 lockAxis; //카메라 회전 감도 제어
+    public Vector2 lockAxis; //카메라 회전 축 제어
     private float xMove; //수평 회전량
     private float yMove; //수직 회전량
     [SerializeField] private float xRotation; //수직 회전 각도
@@ -37,10 +38,13 @@ public class CameraManager : MonoBehaviour
 
     private void Update()
     {
-        //수평 회전 감도 갱신
+        //UI Panel에서의 터치 입력 이동 변화를 대입
+        lockAxis = fixedTouchField.touchDist;
+
+        //수평 회전 축 갱신
         xMove = lockAxis.x * camSensivity * Time.deltaTime;
 
-        //수직 회전 감도 갱신
+        //수직 회전 축 갱신
         yMove = lockAxis.y * camSensivity * Time.deltaTime;
 
         //카메라 수직 회전 제한

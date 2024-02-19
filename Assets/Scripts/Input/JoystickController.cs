@@ -10,11 +10,7 @@ public class JoystickController : MonoBehaviour
 
     [Header("Player Move")]
     [SerializeField] private CharacterController characterController;
-    public float moveSpeed = 5f;
-
-    [Header("Camera Settings")]
-    [SerializeField] private FixedTouchField fixedTouchField;
-    [SerializeField] private CameraManager cameraManager;   
+    public float moveSpeed = 5f;    
    
     [Header("Gun Settings")]
     [SerializeField] private GameObject player;
@@ -27,21 +23,15 @@ public class JoystickController : MonoBehaviour
     void Start()
     {
         if(player == null)
-            player = GameObject.Find("Player");
-
-        fixedTouchField = GetComponentInChildren<FixedTouchField>();
+            player = GameObject.Find("Player");        
 
         SetImages();
         SetAmmoText();
     }
        
     void Update()
-    {       
-        //touch sceen으로 카메라 조절
-        cameraManager.lockAxis = fixedTouchField.touchDist;        
-
+    {
         SetAmmoText();
-
     }    
 
     public void Shoot()
