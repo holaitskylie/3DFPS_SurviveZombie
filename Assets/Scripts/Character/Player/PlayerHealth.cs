@@ -53,7 +53,6 @@ public class PlayerHealth : Entity
         base.Die();
 
         playerAudioPlayer.PlayOneShot(deatClip);       
-        GetComponent<DeathHandler>().HandleDeath();
 
         animator.SetTrigger("Die");
         weapon.gameObject.SetActive(false);

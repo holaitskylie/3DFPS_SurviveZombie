@@ -1,4 +1,4 @@
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,6 +14,10 @@ public class DeathHandler : MonoBehaviour
         gameOverCanvas.enabled = false;
         joystickCanvas.enabled = true;
         healthCanvas.enabled = true;
+
+        //플레이어 사망시 HandleDeath 메서드 실행
+        PlayerHealth player = FindObjectOfType<PlayerHealth>();
+        player.onDeath += () => HandleDeath();
     }
 
     public void HandleDeath()

@@ -82,7 +82,6 @@ public class EnemyHealth : Entity
 
     private void EngageTarget()
     {
-
         FaceTarget();
 
         //target과의 거리가 제동 거리보다 같거나 크다면 계속 추적 
