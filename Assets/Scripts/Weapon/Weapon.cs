@@ -22,11 +22,7 @@ public class Weapon : MonoBehaviour
 
     [Header("Ammo")]
     [SerializeField] private Ammo ammoSlot;
-    [SerializeField] private AmmoType ammoType;
-
-    [Header("UI")]
-    public Image crossHair;
-    private Color originColor;
+    [SerializeField] private AmmoType ammoType;    
 
     private void OnEnable()
     {
@@ -45,8 +41,6 @@ public class Weapon : MonoBehaviour
 
         gunAudioPlayer = GetComponent<AudioSource>();       
         joystick = FindObjectOfType<JoystickController>();
-
-        originColor = crossHair.color;
 
     }
        
@@ -110,16 +104,9 @@ public class Weapon : MonoBehaviour
             IDamageable target = hit.collider.GetComponent<IDamageable>();
 
             if (target != null)
-            {
                 target.OnDamage(damage, hit.point, hit.normal);
-                crossHair.color = Color.yellow;
-            }
             else
-            {
-                crossHair.color = originColor;
                 return;
-            }
-                         
             
             hitPosition = hit.point;            
 

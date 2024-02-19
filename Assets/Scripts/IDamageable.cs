@@ -1,4 +1,4 @@
-using System.Collections;
+ï»¿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -7,6 +7,6 @@ public interface IDamageable
     void OnDamage(float damage, Vector3 hitPoint, Vector3 hitnormal);    
 }
 
-//damage : µ¥¹ÌÁö Å©±â
-//hitPoint : °ø°İ´çÇÑ À§Ä¡
-//hitNormal : °ø°İ´çÇÑ Ç¥¸éÀÇ ¹æÇâ
+//damage : ë°ë¯¸ì§€ í¬ê¸°
+//hitPoint : ê³µê²©ë‹¹í•œ ìœ„ì¹˜(ë ˆì´ë¥¼ ë§ì€ ìœ„ì¹˜)
+//hitNormal : ê³µê²©ë‹¹í•œ í‘œë©´ì˜ ë°©í–¥(ë ˆì´ê°€ ì¶©ëŒí•œ í‘œë©´ ë°©í–¥)

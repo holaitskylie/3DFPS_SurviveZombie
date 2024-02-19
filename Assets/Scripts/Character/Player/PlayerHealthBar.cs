@@ -31,6 +31,10 @@ public class PlayerHealthBar : MonoBehaviour
     private void UpdateHealthUI()
     {
         hpSlider.value = player.currentHealth;
+
+        if(player.currentHealth > player.startingHealth )
+            player.currentHealth = player.startingHealth;
+
         hpText.text = player.currentHealth.ToString() + "/" + player.startingHealth.ToString();
     }
 }

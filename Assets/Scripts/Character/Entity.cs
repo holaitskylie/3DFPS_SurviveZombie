@@ -4,7 +4,7 @@ using UnityEngine;
 public class Entity : MonoBehaviour, IDamageable
 {
     public float startingHealth = 100f;
-    public float currentHealth { get; protected set; }
+    public float currentHealth;
     public bool isDead { get; protected set; }
     public System.Action onDeath;
 
